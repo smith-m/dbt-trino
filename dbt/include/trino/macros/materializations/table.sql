@@ -1,4 +1,4 @@
-{% materialization table, adapter='trino' %}
+{% materialization table, adapter = 'trino' %}
   {%- set identifier = model['alias'] -%}
   {%- set tmp_identifier = model['name'] + '__dbt_tmp' -%}
   {%- set backup_identifier = model['name'] + '__dbt_backup' -%}
@@ -27,10 +27,7 @@
   {{ adapter.drop_relation(intermediate_relation) }}
   {{ adapter.drop_relation(backup_relation) }}
 
-  {{ run_hooks(pre_hooks, inside_transaction=False) }}
-
-  -- `BEGIN` happens here:
-  {{ run_hooks(pre_hooks, inside_transaction=True) }}
+  {{ run_hooks(pre_hooks) }}
 
   -- build model
   {% call statement('main') -%}
@@ -44,15 +41,10 @@
 
   {{ adapter.rename_relation(intermediate_relation, target_relation) }}
 
-  {{ run_hooks(post_hooks, inside_transaction=True) }}
-
-  -- `COMMIT` happens here
-  {{ adapter.commit() }}
-
   -- finally, drop the existing/backup relation after the commit
   {{ drop_relation_if_exists(backup_relation) }}
 
-  {{ run_hooks(post_hooks, inside_transaction=False) }}
+  {{ run_hooks(post_hooks) }}
 
   {{ return({'relations': [target_relation]}) }}
 {% endmaterialization %}
