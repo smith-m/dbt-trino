@@ -1,12 +1,15 @@
 ## dbt-trino TBD (TBD)
 
 ### Features
+- Add table_glue materialization ([#26](https://github.com/starburstdata/dbt-trino/issues/26), [#54](https://github.com/starburstdata/dbt-trino/pull/54))
 
 ### Fixes
 
 ### Under the hood
+- Refactor table materialization ([#54](https://github.com/starburstdata/dbt-trino/pull/54))
 
 Contributors:
+* [@hovaesco](https://github.com/hovaesco) ([#54](https://github.com/starburstdata/dbt-trino/pull/54))
 
 ## dbt-trino 1.0.3 (March 2, 2022)
 

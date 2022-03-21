@@ -180,6 +180,19 @@ NOTE that this functionality works on incremental models that use partitioning:
 }}
 ```
 
+#### Materialization
+
+Adapter supports all materializations provided by dbt-core.
+
+Additionally, adapter provides `table_glue` materialization,
+which overcome table rename limitation in AWS Glue.
+
+Using `table` materialization with AWS Glue may result in below error:
+
+```
+TrinoUserError(type=USER_ERROR, name=NOT_SUPPORTED, message="Table rename is not yet supported by Glue service")
+```
+
 #### Use table properties to configure connector specifics
 
 Trino connectors use table properties to configure connector specifics.

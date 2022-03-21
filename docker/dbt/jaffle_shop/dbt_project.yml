@@ -22,6 +22,8 @@ models:
     materialized: table
     staging:
       materialized: view
+    table_glue:
+      materialized: table_glue
 
 seeds: 
   jaffle_shop:
